@@ -22,3 +22,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Pycache
+*.pt
+__pycache__/
