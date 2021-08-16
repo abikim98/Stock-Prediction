@@ -1,15 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[7]:
-
-
-import torch 
+import torch
 import torch.nn as nn
-
-
-# In[8]:
-
 
 from dataset import stockDataset
 from model import LSTM
@@ -18,22 +8,11 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 
-# In[9]:
-
-
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 print(device)
 
-
-# In[ ]:
-
-
 train_dataloader = torch.utils.data.DataLoader(train_set, batch_size = 20, shuffle = False)
 valid_dataloader = torch.utils.data.DataLoader(valid_set, batch_size = len(valid_set), shuffle = False)
-
-
-# In[ ]:
-
 
 num_epochs = 100
 learning_rate = 0.01
@@ -47,10 +26,6 @@ lstm = LSTM(input_dim, hidden_dim, num_layers, output_dim).to(device)
 rnn = RNN(input_dim, hidden_dim, num_layers, output_dim.to(device)
 loss_function = torch.nn.MSELoss()
 optimizer = torch.optim.Adam(lstm.parameters(), lr = learning_rate)
-
-
-# In[10]:
-
 
 def train(model, train_dataloader, optimizer):
     model.train()
@@ -86,4 +61,3 @@ def valid(model, valid_dataloader, optimizer):
         plt.plot(y, label="Actual Data")
         plt.legend()
         plt.show()
-

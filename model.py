@@ -1,15 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-import torch 
+import torch
 import torch.nn as nn 
-
-
-# In[ ]:
-
 
 class RNN(nn.Module):
     def __init__(self, input_dim, hidden_dim, num_layers, output_dim):
@@ -26,9 +16,6 @@ class RNN(nn.Module):
         out = self.fc(out[:,-1,:])
         
         return out 
-
-
-# In[ ]:
 
 
 class LSTM(nn.Module):

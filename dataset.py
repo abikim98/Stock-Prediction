@@ -1,23 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import yfinance as yf
 import numpy as np
 import torch 
 import torch.nn as nn
 
 
-# In[2]:
-
 
 data = yf.download('005930.KS', start = '2019-01-01', end = '2021-01-01')
-
-
-# In[3]:
-
 
 class stockDataset(torch.utils.data.Dataset):
     def __init__ (self, stock_path, start_date, end_date, seq_len):
@@ -47,10 +35,6 @@ class stockDataset(torch.utils.data.Dataset):
             normalized_result = [p/i[0]-1 for p in i]
             normalized_data.append(normalized_result)
         return np.array(normalized_data)
-
-
-# In[4]:
-
 
 train_set = stockDataset('005930.KS', '2019-01-01', '2021-3-22', 50)
 valid_set = stockDataset('005930.KS', '2021-03-23', '2021-07-16', 50)
