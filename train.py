@@ -22,7 +22,7 @@ num_layers = 1
 output_dim = 1
 
 lstm = LSTM(input_dim, hidden_dim, num_layers, output_dim).to(device)
-rnn = RNN(input_dim, hidden_dim, num_layers, output_dim.to(device)
+rnn = RNN(input_dim, hidden_dim, num_layers, output_dim).to(device)
 loss_function = torch.nn.MSELoss()
 optimizer = torch.optim.Adam(lstm.parameters(), lr = learning_rate)
 
