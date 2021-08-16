@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-
 from dataset import stockDataset
 from model import LSTM
 from model import RNN
@@ -28,7 +27,7 @@ loss_function = torch.nn.MSELoss()
 optimizer = torch.optim.Adam(lstm.parameters(), lr = learning_rate)
 
 def train(model, train_dataloader, optimizer):
-    model.train()
+    lstm.train()
     for epoch in train_loader:
         train_loader = tqdm(train_dataloader)
         for data in train_loader:
@@ -44,7 +43,7 @@ def train(model, train_dataloader, optimizer):
         losses =[]
         
 def valid(model, valid_dataloader, optimizer):
-    model.eval()
+    lstm.eval()
     for data in valid_dataloader:
         x, y = data
         x = x.reshape(x.shape[0], x.shape[1], -1).float()
