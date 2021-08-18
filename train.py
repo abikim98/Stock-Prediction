@@ -42,7 +42,7 @@ def valid(model, valid_dataloader, optimizer):
         plt.legend()
         plt.show()
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     print("device", device)
 
