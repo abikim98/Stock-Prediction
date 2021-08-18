@@ -9,8 +9,7 @@ import matplotlib.pyplot as plt
 
 def train(model, train_dataloader, optimizer):
     model.train()
-    for epoch in train_loader:
-        train_loader = tqdm(train_dataloader)
+    train_loader = tqdm(train_dataloader)
         for data in train_loader:
             x, y = data
             x = x.reshape(x.shape[0], x.shape[1],1).float()
@@ -74,6 +73,5 @@ if __name__ == "__main__":
     for epoch in range(num_epochs):
         train(model, train_dataloader, optimizer)
         valid(model, valid_dataloader, optimizer)
-        scheduler.step()
 
 
