@@ -10,17 +10,17 @@ import matplotlib.pyplot as plt
 def train(model, train_dataloader, optimizer):
     model.train()
     train_loader = tqdm(train_dataloader)
-        for data in train_loader:
-            x, y = data
-            x = x.reshape(x.shape[0], x.shape[1],1).float()
+    for data in train_loader:
+        x, y = data
+        x = x.reshape(x.shape[0], x.shape[1],1).float()
             
-            outputs = model(x.to(device))
-            optimizer.zero_grad()
-            loss = loss_function(outputs, y.float().to(device))
-            optimizer.step()
-            train_loader.set_description(f"Epoch:{epoch}, loss: {loss.item():.5f}")
+        outputs = model(x.to(device))
+        optimizer.zero_grad()
+        loss = loss_function(outputs, y.float().to(device))
+        optimizer.step()
+        train_loader.set_description(f"Epoch:{epoch}, loss: {loss.item():.5f}")
         
-        losses =[]
+    losses =[]
         
 def valid(model, valid_dataloader, optimizer):
     model.eval()
