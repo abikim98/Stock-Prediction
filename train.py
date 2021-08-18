@@ -63,7 +63,7 @@ if __name__ == "__main__":
     model_name = "rnn"
     if model_name == "rnn":
         model = RNN(input_dim, hidden_dim, num_layers, output_dim).to(device)
-    elif model_name = "lstm"
+    elif model_name == "lstm":
         model = LSTM(input_dim, hidden_dim, num_layers, output_dim).to(device)
 
 
