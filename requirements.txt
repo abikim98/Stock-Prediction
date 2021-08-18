@@ -1,5 +1,5 @@
 matplotlib==3.4.2
 numpy==1.20.3
-FinanceDataReader==0.9.31
+finance-datareader ==0.9.31
 yfinance==0.1.63
 torch==1.8.0

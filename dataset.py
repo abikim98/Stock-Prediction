@@ -36,6 +36,5 @@ class stockDataset(torch.utils.data.Dataset):
             normalized_data.append(normalized_result)
         return np.array(normalized_data)
 
-train_set = stockDataset('005930.KS', '2019-01-01', '2021-3-22', 50)
-valid_set = stockDataset('005930.KS', '2021-03-23', '2021-07-16', 50)
+
 

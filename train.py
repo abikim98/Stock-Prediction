@@ -7,27 +7,8 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-print(device)
-
-train_dataloader = torch.utils.data.DataLoader(train_set, batch_size = 20, shuffle = False)
-valid_dataloader = torch.utils.data.DataLoader(valid_set, batch_size = len(valid_set), shuffle = False)
-
-num_epochs = 100
-learning_rate = 0.01
-
-input_dim = 1
-hidden_dim = 32
-num_layers = 1
-output_dim = 1
-
-lstm = LSTM(input_dim, hidden_dim, num_layers, output_dim).to(device)
-rnn = RNN(input_dim, hidden_dim, num_layers, output_dim).to(device)
-loss_function = torch.nn.MSELoss()
-optimizer = torch.optim.Adam(lstm.parameters(), lr = learning_rate)
-
 def train(model, train_dataloader, optimizer):
-    lstm.train()
+    model.train()
     for epoch in train_loader:
         train_loader = tqdm(train_dataloader)
         for data in train_loader:
@@ -43,14 +24,14 @@ def train(model, train_dataloader, optimizer):
         losses =[]
         
 def valid(model, valid_dataloader, optimizer):
-    lstm.eval()
+    model.eval()
     for data in valid_dataloader:
         x, y = data
         x = x.reshape(x.shape[0], x.shape[1], -1).float()
         y = y.float()
         with torch.no_grad():
-            rnn.eval()
-            valid_predict = rnn(x.to(device))
+            model.eval()
+            valid_predict = model(x.to(device))
             
             loss = loss_function(valid_predict.cpu(), y)
         print('valid_loss', loss)
@@ -60,3 +41,39 @@ def valid(model, valid_dataloader, optimizer):
         plt.plot(y, label="Actual Data")
         plt.legend()
         plt.show()
+
+if __name__ = "__main__":
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    print("device", device)
+
+    train_set = stockDataset('005930.KS', '2019-01-01', '2021-3-22', 50)
+    valid_set = stockDataset('005930.KS', '2021-03-23', '2021-07-16', 50)
+
+    train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=20, shuffle=False)
+    valid_dataloader = torch.utils.data.DataLoader(valid_set, batch_size=len(valid_set), shuffle=False)
+
+    num_epochs = 100
+    learning_rate = 0.01
+
+    input_dim = 1
+    hidden_dim = 32
+    num_layers = 1
+    output_dim = 1
+
+    model_name = "rnn"
+    if model_name = "rnn":
+        model = RNN(input_dim, hidden_dim, num_layers, output_dim).to(device)
+    elif model_name = "lstm"
+        model = LSTM(input_dim, hidden_dim, num_layers, output_dim).to(device)
+
+
+    loss_function = torch.nn.MSELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
+
+
+    for epoch in range(num_epochs):
+        train(model, train_dataloader, optimizer)
+        valid(model, valid_dataloader, optimizer)
+        scheduler.step()
+
+
